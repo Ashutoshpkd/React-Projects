@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const MainWrapper = styled.div`
 color: white;
 padding: 0 1rem;
-margin: 2rem auto;
-width: 70%;
-max-width: 95%;
+margin: 2rem 0;
+width: 100%;
+max-width: 100%;
 `;
 
 export const Label = styled.label`
