@@ -3,6 +3,7 @@ import { useState } from 'react';
 import * as S from './Expense.style';
 import Card from '../Card/Card';
 import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
+import Chart from '../Chart/Chart';
 
 const Expense = (props) => {
     const { expenses } = props;
@@ -31,6 +32,7 @@ const Expense = (props) => {
         <Card>
         <S.ExpenseWrapper>
         <ExpenseFilter onSelectChange={changeFilteredYear} selected={filteredYear}/>
+        <Chart expenses={expensesInSelectedYear} />
         {expenseContent}
         </S.ExpenseWrapper>
         </Card>
