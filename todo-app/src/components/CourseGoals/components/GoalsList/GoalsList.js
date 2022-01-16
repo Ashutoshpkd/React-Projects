@@ -15,7 +15,7 @@ const GoalsList = (props) => {
     return (
         <S.Main>
             <S.List onClick={clickHandler}>
-                {goal}
+                {`${goal.name} is ${goal.age} year's old.`}
             </S.List>
         </S.Main>
     );

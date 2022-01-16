@@ -3,27 +3,40 @@ import { useState } from 'react';
 import Card from '../Card/Card';
 
 const CourseForm = (props) => {
-    const [goal, setGoal] = useState('');
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
 
-    const changeHandler = (e) => {
-        setGoal(e.target.value);
+    const namechangeHandler = (e) => {
+        setName(e.target.value);
+    };
+
+    const agechangeHandler = (e) => {
+        setAge(e.target.value);
     };
 
     const submitHandler = (e) => {
         e.preventDefault();
-        props.onSubmit(goal);
-        setGoal('');
+
+        if(props.noError(name, age)) {
+            props.onSubmit(name, age);
+        };
+        setName('');
+        setAge('');
     };
 
     return (
         <Card>
             <S.Form onSubmit={submitHandler}>
                 <S.Wrapper>
-                <S.Label>Course Goals</S.Label>
-                <S.Input type='text' value={goal} onChange={changeHandler} />
+                <S.Label>Name</S.Label>
+                <S.Input type='text' value={name} onChange={namechangeHandler} />
+                </S.Wrapper>
+                <S.Wrapper>
+                <S.Label>Age</S.Label>
+                <S.Input type='text' value={age} onChange={agechangeHandler} />
                 </S.Wrapper>
                 <S.ButtonWrapper >
-                <S.Button type='submit'>Add Goal</S.Button>
+                <S.Button type='submit'>Add User</S.Button>
                 </S.ButtonWrapper>
             </S.Form>
         </Card>
