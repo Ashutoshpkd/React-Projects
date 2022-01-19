@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
@@ -10,12 +10,20 @@ function App() {
   const loginHandler = (email, password) => {
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
+    localStorage.setItem('IS_LOGGED_IN', 'true');
     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
+    localStorage.setItem('IS_LOGGED_IN', 'false');
     setIsLoggedIn(false);
   };
+
+  useEffect(() => {
+    console.log('APP>JS')
+    const isLoggedIn = localStorage.getItem('IS_LOGGED_IN');
+    setIsLoggedIn(isLoggedIn === 'true');
+  }, [])
 
   return (
     <React.Fragment>
