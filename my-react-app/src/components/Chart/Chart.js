@@ -21,6 +21,7 @@ const Chart = (props) => {
         <S.Chart>
             {expensesArray.map((expense) => (
                 <ChartBar
+                    key={expense.label}
                     label={expense.label}
                     value={expense.value}
                     maxValue={maxInYear}
