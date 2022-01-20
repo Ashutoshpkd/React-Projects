@@ -63,5 +63,6 @@ export const InputWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-    text-align: right;
+    display: flex;
+    justify-content: end;
 `;

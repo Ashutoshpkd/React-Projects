@@ -7,3 +7,9 @@ export const ExpenseWrapper = styled.div`
     width: 70%;
     max-width: 95%;
 `;
+
+export const Content = styled.p`
+    color: red;
+    text-align: center;
+    font: inherit;
+`;
