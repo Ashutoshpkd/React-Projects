@@ -1,12 +1,32 @@
 import MealsForm from './MealsForm';
+import React, {useContext, useState} from 'react';
 import classes from './MealsItem.module.css';
+import CartContext from '../../../store/cart-context';
 
 const MealsItem = (props) => {
     const {
         name,
         description,
         price,
+        id,
     } = props;
+
+    const [amount, setAmount] = useState(1);
+    const ctx = useContext(CartContext);
+
+    const changeHandler = (itemAmount) => {
+        setAmount(itemAmount);
+    }
+
+    const submitHandler = () => {
+        const item = {
+            id: props.id,
+            amount: amount,
+            name: name,
+            price: price,
+        };
+        ctx.addItem(item);
+    }
 
     const priceInCurr = `$${price}`;
 
@@ -18,7 +38,7 @@ const MealsItem = (props) => {
                 <div className={classes.price}>{priceInCurr}</div>
             </div>
             <div className={classes.mealsForm}>
-                <MealsForm />
+                <MealsForm onChange={changeHandler} onSubmit={submitHandler} id={id} amount={amount}/>
             </div>
         </li>
     );

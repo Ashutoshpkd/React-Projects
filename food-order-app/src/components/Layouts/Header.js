@@ -12,9 +12,7 @@ const Header = (props) => {
         <React.Fragment>
             <S.Header>
                 <h1>{title}</h1>
-                <CartButton
-                    items={3}
-                />
+                <CartButton />
             </S.Header>
             <S.Wrapper>
             <S.Image src={Meals} />
