@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import cartIcon from '../../assets/download.svg';
+import cartIcon from '../../assets/cartIcon.svg';
 import AuthContext from '../../store/auth-context';
 import CartContext from '../../store/cart-context';
 import * as S from './CartButton.style';
