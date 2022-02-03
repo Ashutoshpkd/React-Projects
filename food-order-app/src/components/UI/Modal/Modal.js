@@ -2,15 +2,16 @@ import classes from './Modal.module.css';
 import ReactDOM from 'react-dom';
 import { useContext } from 'react';
 import AuthContext from '../../../store/auth-context';
+import * as S from './Modal.style';
 
 const Modal = (props) => {
-    const ctx = useContext(AuthContext)
+    const ctx = useContext(AuthContext);
     return ReactDOM.createPortal(
         <>
-        <div className={classes.backdrop} onClick={ctx.closeModal}/>
-        <div className={classes.modal}>
+        <S.BackDrop isSpinner={props.isSpinner} onClick={ctx.closeModal}/>
+        <S.Modal isSpinner={props.isSpinner} data-locator='modal'>
             {props.children}
-        </div>
+        </S.Modal>
         </>,
         document.getElementById('portal')
     )

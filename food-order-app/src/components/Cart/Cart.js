@@ -1,13 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../../store/auth-context';
 import CartContext from '../../store/cart-context';
 import Modal from '../UI/Modal/Modal';
 import classes from './Cart.module.css';
 import CartItem from './CartItem/CartItem';
+import Checkout from './Checkout/Checkout';
 
 const Cart = (props) => {
     const ctx = useContext(AuthContext);
     const cartCtx = useContext(CartContext);
+    const [openForm, setOpenForm] = useState(false);
     const totalItem = `$${cartCtx.totalAmount}`;
     const cartItems = <ul className={classes['cart-items']}>{cartCtx.item.map(item => (
        <CartItem 
@@ -29,10 +31,17 @@ const Cart = (props) => {
                     <span>{totalItem}</span>
                 </div>
                 <div className={classes.actions}>
-                <button type='button' className={classes['button--alt']} onClick={ctx.closeModal}>Close</button>
-                <button type='button' className={classes.button}>Order</button>
+                {!openForm && (
+                    <>
+                    <button type='button' className={classes['button--alt']} onClick={ctx.closeModal}>Close</button>
+                    <button type='button' className={classes.button} onClick={(e) => setOpenForm(true)}>Order</button>
+                    </>
+                )}
                 </div>
             </div>
+            {openForm && (
+            <Checkout onCancel={() => setOpenForm(false)}/>
+            )}
         </Modal>
     );
 };
