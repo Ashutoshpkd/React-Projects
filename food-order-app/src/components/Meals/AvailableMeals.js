@@ -1,37 +1,33 @@
+import { useEffect, useState } from 'react';
 import Card from '../UI/Card/Card';
 import classes from './AvailableMeals.module.css';
 import MealsItem from './MealsItem/MealsItem';
+import Modal from '../UI/Modal/Modal';
+import RingLoader from "react-spinners/RingLoader";
 
 const AvailableMeals = (props) => {
-    const DUMMY_MEALS = [
-        {
-            id: 'm1',
-            name: 'Sushi',
-            description: 'Finest fish and veggies',
-            price: 22.99,
-        },
-        {
-            id: 'm2',
-            name: 'Schnitzel',
-            description: 'A german specialty!',
-            price: 16.5,
-        },
-        {
-            id: 'm3',
-            name: 'Barbecue Burger',
-            description: 'American, raw, meaty',
-            price: 12.99,
-        },
-        {
-            id: 'm4',
-            name: 'Green Bowl',
-            description: 'Healthy...and green...',
-            price: 18.99,
-        },
-    ];
+
+    const [mealsData, setMeals] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchData = async () => {
+        setIsLoading(true);
+        const response = await fetch('https://custom-hook-1-default-rtdb.firebaseio.com/meals.json');
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+
+        setMeals(prevMeals => prevMeals.concat(data));
+        setIsLoading(false);
+    }
+
+    useEffect( () => {
+        fetchData();
+    }, []);
+
 
     const meals =
-        DUMMY_MEALS.map((meal) => (
+        mealsData.map((meal) => (
             <MealsItem
             key={meal.id}
             id={meal.id}
@@ -43,11 +39,18 @@ const AvailableMeals = (props) => {
 
     return (
         <section className={classes.meals}>
+            {!isLoading && (            
             <Card>
                 <ul>
                     {meals}
                 </ul>
             </Card>
+            )}
+            {isLoading && (
+                <Modal isSpinner>
+                    <RingLoader color='#F00D29' loading size={60} />
+                </Modal>
+            )}
         </section>
     );
 };

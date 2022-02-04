@@ -30,3 +30,7 @@
   .mealsForm {
       padding-top: 10px;
   }
+
+  .wrapper:last-child {
+    border-bottom: none;
+  }
